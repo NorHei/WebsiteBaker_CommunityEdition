@@ -15,7 +15,7 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
 // Setup admin object
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+
 $admin = new admin('Addons', 'languages_install', false);
 if( !$admin->checkFTAN() )
 {
@@ -32,7 +32,7 @@ if(!isset($_FILES['userfile'])) {
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 // Create temp string
 $temp_string = '';

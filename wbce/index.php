@@ -35,7 +35,7 @@ if (!defined('TABLE_PREFIX')) {
     header('Location: ' . $target_url); exit; 
 }
 
-require_once WB_PATH . '/framework/class.frontend.php';
+
 // Create new frontend object
 $wb = new frontend();
 
@@ -64,6 +64,13 @@ require WB_PATH . '/framework/frontend.functions.php';
 
 //Get pagecontent in buffer for Droplets and/or Filter operations
 ob_start();
+
+// require template include.php 
+if (file_exists(WB_PATH . '/templates/' . TEMPLATE . '/include.php')){
+    require WB_PATH . '/templates/' . TEMPLATE . '/include.php'; 
+}
+
+//require the actual template file 
 require WB_PATH . '/templates/' . TEMPLATE . '/index.php';
 $output = ob_get_clean();
  
@@ -73,10 +80,10 @@ if(function_exists('opf_apply_filters')) {
 }
 
 // execute old frontend output filters or not
-if (!defined("WB_SUPPRESS_OLD_OPF") or  WB_SUPPRESS_OLD_OPF===false){
+if (!defined("WB_SUPPRESS_OLD_OPF") or !WB_SUPPRESS_OLD_OPF){
     // Module is installed?
-    if (file_exists(WB_PATH . '/modules/output_filter/index.php')) {
-        include_once WB_PATH . '/modules/output_filter/index.php';
+    if (file_exists(WB_PATH . '/modules/output_filter/filter_routines.php')) {
+        include_once WB_PATH . '/modules/output_filter/filter_routines.php';
         if (function_exists('executeFrontendOutputFilter')) {
             $output = executeFrontendOutputFilter($output);
         }

@@ -131,9 +131,7 @@ function status_msg($message, $class = 'check', $element = 'span')
 }
 
 // include required scripts and setup admin object
-@require_once 'config.php';
-require_once WB_PATH . '/framework/functions.php';
-require_once WB_PATH . '/framework/class.admin.php';
+require_once 'config.php';
 $admin = new admin('Addons', 'modules', false, false);
 
 // database tables including in WB package
@@ -387,6 +385,10 @@ echo $drops;
 $file_name = (!in_array("mod_topics", $all_tables) ? "install.php" : "upgrade.php");
 require_once WB_PATH . "/modules/topics/" . $file_name;
 
+//update output filter 
+require_once WB_PATH . "/modules/output_filter/upgrade.php";
+
+
 // check again all tables, to get a new array
 if (sizeof($all_tables) < sizeof($table_list)) {$all_tables = check_wb_tables();}
 
@@ -469,7 +471,7 @@ echo "<br />Adding mediasettings to settings table<br />";
 Settings::Set('mediasettings','', false);
 
 echo "<br />Adding Secureform Settings if not exits.<br />";
-// Settings::Set ("wb_maintainance_mode", false, fals);
+// Settings::Set ("wb_maintainance_mode", false, false);
 Settings::Set ("wb_secform_secret", "5609bnefg93jmgi99igjefg", false);
 Settings::Set ("wb_secform_secrettime", '86400', false);
 Settings::Set ("wb_secform_timeout", '7200', false);

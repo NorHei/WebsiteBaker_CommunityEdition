@@ -76,6 +76,8 @@ class database
             }
             $this->db_name = DB_NAME;
             $this->connected = true;
+            //added cause of problems whith mysql strict mode
+            mysqli_query($this->db_handle,"SET @@sql_mode=''");
         }
         return $this->connected;
     }
@@ -189,9 +191,11 @@ class database
  */
     public function field_exists($table_name, $field_name)
     {
-        $sql = 'DESCRIBE `' . $table_name . '` `' . $field_name . '` ';
-        $query = $this->query($sql);
-        return ($query->numRows() != 0);
+        $sql="SHOW COLUMNS FROM `$table_name` LIKE '$field_name'";
+        $result = $this->query($sql);
+        if (!$result) return false;
+        $exists = ($result->numRows())?true:false;
+        return $exists;
     }
 
 /*

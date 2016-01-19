@@ -12,7 +12,7 @@
 
 // Setup admin object
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+
 $admin = new admin('Addons', 'languages_uninstall', false);
 if( !$admin->checkFTAN() )
 {
@@ -35,7 +35,7 @@ if(trim($_POST['code']) == '') {
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 // Check if the language exists
 if(!file_exists(WB_PATH.'/languages/'.$_POST['code'].'.php')) {
