@@ -43,4 +43,4 @@ $database->query("RENAME TABLE `".TABLE_PREFIX."mod_".$tablename."_settings` TO 
  
 rm_full_dir(WB_PATH.$topics_directory);
 
-?>
+

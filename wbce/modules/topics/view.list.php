@@ -304,8 +304,8 @@ if($num_topics > 0) {
 		
 		
 		//Placeholder [EDITLINK]
-		//Eigentlich müsste bei einem Topic-Master noch überprüft werden, ob der User Berechtigung für die angegebene page_id hat. 
-		//Das bremst aber zu stark ein und wird ohnehin beim Aufruf überprüft.
+		//Eigentlich mÃ¼sste bei einem Topic-Master noch Ã¼berprÃ¼ft werden, ob der User Berechtigung fÃ¼r die angegebene page_id hat. 
+		//Das bremst aber zu stark ein und wird ohnehin beim Aufruf Ã¼berprÃ¼ft.
 		$edit_link = '';
 		if ($authoronly) {						
 			$makelisteditlink = false;
@@ -395,4 +395,4 @@ echo $output;
 // Print footer
 echo  str_replace(array('[SECTION_TITLE]','[SECTION_DESCRIPTION]','[PICTURE_DIR]','{PREV_NEXT_PAGES}','[PREVIOUS_LINK]','[NEXT_LINK]','[TOTALNUM]', '{JUMP_LINKS_LIST}'), array($section_title,$section_description,$picture_dir,$prev_next_pages,$previous_link,$next_link,$total_num, $jumplinks ), $setting_footer);
 
-?>
+

@@ -208,4 +208,4 @@ if ($fredit == 1) {
 } else {
 	$admin->print_footer();
 }
-?>
+

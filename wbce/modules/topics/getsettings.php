@@ -118,4 +118,4 @@ if ($wb->is_authenticated()) {echo "//Starting Javascript\n";} else {die("Sorry,
 	}
 	echo 'alert("Done");';
 	
-	?>
+	

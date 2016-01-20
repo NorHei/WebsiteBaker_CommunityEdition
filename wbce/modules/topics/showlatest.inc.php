@@ -21,5 +21,5 @@ if($query_topics->numRows() > 0) {
 	}
 }
 
-?>
+
 

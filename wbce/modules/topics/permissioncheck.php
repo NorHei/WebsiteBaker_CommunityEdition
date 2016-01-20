@@ -103,4 +103,4 @@ if ($fredit == 1) {
 	//Header Ausgeben
 	require(WB_PATH.'/modules/'.$mod_dir .'/inc/fredithead.php');
 }
-?>
+

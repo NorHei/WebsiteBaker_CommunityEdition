@@ -229,4 +229,4 @@ if ($fredit == 1) {
 	$admin->print_footer();
 }
 
-?>
+

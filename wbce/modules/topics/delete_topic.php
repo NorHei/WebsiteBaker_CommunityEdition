@@ -58,4 +58,4 @@ if($database->is_error()) {
 // Print admin footer
 $admin->print_footer();
 
-?>
+

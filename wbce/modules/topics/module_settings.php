@@ -93,4 +93,4 @@ $topics_search_directory = '/../topics/';
 
 $topics_virtual_directory = $topics_directory;
 
-?>
+

@@ -114,4 +114,4 @@
 	// Topic Block2
 	$topic_block2 = str_replace(array_keys($placeholders), array_values($placeholders), $setting_topic_block2);
 	define("TOPIC_BLOCK2", $topic_block2); //define always to prevent from double-Topics
-?>	
+	
