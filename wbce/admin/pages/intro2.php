@@ -12,7 +12,6 @@
 
 // Create new admin object
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_intro',false);
 if (!$admin->checkFTAN())
 {
@@ -31,7 +30,7 @@ if(!isset($_POST['content'])) {
 // $content = $admin->strip_slashes($content);
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 $admin->print_header();
 // Write new content

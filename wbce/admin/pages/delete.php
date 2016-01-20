@@ -12,11 +12,11 @@
 
 // Create new admin object and print admin header
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+
 $admin = new admin('Pages', 'pages_delete');
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 
 if( (!($page_id = $admin->checkIDKEY('page_id', 0, $_SERVER['REQUEST_METHOD']))) )

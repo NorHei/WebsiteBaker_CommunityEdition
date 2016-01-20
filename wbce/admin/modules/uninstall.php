@@ -12,7 +12,7 @@
 
 // Setup admin object
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+
 $admin = new admin('Addons', 'modules_uninstall', false);
 if( !$admin->checkFTAN() )
 {
@@ -37,7 +37,7 @@ if(trim($file) == '') {
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 // Check if the module exists
 if(!is_dir(WB_PATH.'/modules/'.$file)) {

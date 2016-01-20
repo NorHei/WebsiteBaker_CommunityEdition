@@ -11,7 +11,6 @@
  */
 
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
 
 if(isset($_GET['advanced']) && $_GET['advanced'] == 'yes') {
     $admin = new admin('Settings', 'settings_advanced');
@@ -20,7 +19,7 @@ if(isset($_GET['advanced']) && $_GET['advanced'] == 'yes') {
 }
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 require_once(WB_PATH.'/framework/functions-utf8.php');
 
 // Setup template object, parse vars to it, then parse it

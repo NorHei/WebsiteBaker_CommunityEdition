@@ -15,7 +15,6 @@ require('../../config.php');
 include_once('resize_img.php');
 include_once('parameters.php');
 
-require_once(WB_PATH.'/framework/class.admin.php');
 // require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');	// Required to unzip file.
 // suppress to print the header, so no new FTAN will be set
 $admin = new admin('Media', 'media_upload', false);
@@ -33,7 +32,7 @@ $requestMethod = '_'.strtoupper($_SERVER['REQUEST_METHOD']);
 $target = (isset(${$requestMethod}['target'])) ? ${$requestMethod}['target'] : '';
 
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 $directory = ($target == '/') ?  '' : $target;
 $dirlink = 'index.php?dir='.$directory;
@@ -138,7 +137,6 @@ function pclzipCheckValidFile($p_event, &$p_header)
 // If the user chose to unzip the first file, unzip into the current folder
 if (isset($_POST['unzip']) && isset($filename1) && file_exists($filename1) ) {
 	// Required to unzip file.
-	require_once(WB_PATH.'/include/pclzip/pclzip.lib.php');
 	$archive = new PclZip($filename1);
 	$list = $archive->extract(PCLZIP_OPT_PATH, $relative,PCLZIP_CB_PRE_EXTRACT, 'pclzipCheckValidFile');
 

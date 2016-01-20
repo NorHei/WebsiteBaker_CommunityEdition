@@ -10,12 +10,16 @@
  * @license GNU GPL2 (or any later version)
  */
 
-$debug = true;
+define ("WB_DEBUG", true);
+$debug= true; // left in for possible compatibility issues
 
-if (true === $debug) {
+if (WB_DEBUG === $debug) {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
 }
+define ("WB_SECFORM_TIMEOUT",'7200');
+
+
 // Start a session
 if (!defined('SESSION_STARTED')) {
     session_name('wb-installer');
@@ -386,11 +390,8 @@ END OF TABLES IMPORT
 // initialize the system
 include WB_PATH . '/framework/initialize.php';
 
-$sSecMod = (defined('SECURE_FORM_MODULE') && SECURE_FORM_MODULE != '') ? '.' . SECURE_FORM_MODULE : '';
-$sSecMod = WB_PATH . '/framework/SecureForm' . $sSecMod . '.php';
-require_once $sSecMod;
+require_once WB_PATH . '/framework/SecureForm.php';
 
-require_once WB_PATH . '/framework/class.admin.php';
 /***********************
 // Dummy class to allow modules' install scripts to call $admin->print_error
  ***********************/
@@ -403,16 +404,7 @@ class admin_dummy extends admin
     }
 }
 
-// Include WB functions file
-require_once WB_PATH . '/framework/functions.php';
-// Re-connect to the database, this time using in-build database class
-require_once WB_PATH . '/framework/class.login.php';
-// reconnect database if needed
-//if (!(isset($database) & ($database instanceof database))) {
-//    $database = new database();
-//}
-// Include the PclZip class file (thanks to
-require_once WB_PATH . '/include/pclzip/pclzip.lib.php';
+
 $admin = new admin_dummy('Start', '', false, false);
 
 // Load addons into DB

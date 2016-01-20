@@ -17,10 +17,10 @@
  */
 
 require('../../config.php');
-require_once(WB_PATH.'/framework/class.admin.php');
+
 $admin = new admin('Media', 'media', false);
 // Include the WB functions file
-require_once(WB_PATH.'/framework/functions.php');
+ 
 
 // check if theme language file exists for the language set by the user (e.g. DE, EN)
 if(!file_exists(THEME_PATH .'/languages/'.LANGUAGE .'.php')) {
