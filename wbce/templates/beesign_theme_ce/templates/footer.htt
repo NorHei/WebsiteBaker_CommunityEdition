@@ -1,0 +1,30 @@
+<!-- BEGIN footer_block -->
+
+</td>
+</tr>
+</table>
+
+<table summary="" cellpadding="0" cellspacing="0" border="0" width="100%" style="padding: 10px 0;">
+  <tr>
+    <td style="font-size:12px;text-align:center;">
+      <!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+       <p><b>Fragen? Probleme? Einfach gleich anrufen: Christian Maisriml, 0676 948 29 27</b></p>
+	  <a href="http://wbce.org/" title="external">WebsiteBaker CE</a> is released under the
+      <a href="http://www.gnu.org/licenses/gpl.html" title="WebsiteBaker CE is released under the GNU General Public License">GNU General Public License</a>
+      <!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
+    </td>
+  </tr>
+</table>
+</div>
+<script type="text/javascript">
+document.getElementById("versioninfosFooter").innerHTML = document.getElementById("versioninfos").innerHTML;
+</script>
+{BACKEND_BODY_MODULE_JS}
+<a id="starttoolbox" href="javascript:starttoolbox();"><img src="{THEME_URL}/toolbox/img/start.gif" alt="s" title="start toolbox" /></a>
+<div id="toolboxframe"></div>
+<script src="{THEME_URL}/toolbox/starttoolbox.js" type="text/javascript"></script>
+
+
+</body>
+</html>
+<!-- END footer_block -->

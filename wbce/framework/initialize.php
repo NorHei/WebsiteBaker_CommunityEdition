@@ -10,8 +10,6 @@
  * @license GNU GPL2 (or any later version)
  */
 
-
-
 // DEFAULT SYSTEM SETTINGS
 // remove all unwanted php fancy stuff
 
@@ -19,7 +17,7 @@
 if (!defined("WB_DEBUG")) define("WB_DEBUG", true);
  
 // no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 
 // Stop execution if PHP version is too old
 if (version_compare(PHP_VERSION, '5.3.6', '<')) {
@@ -46,7 +44,8 @@ $database = new database();
 // PRE INIT
 
 //// BESSER MYSQL FIND_IN_SET()?
-//http://forum.wbce.org/viewtopic.php?id=84
+http://forum.wbce.org/viewtopic.php?id=84
+
 
 // Pre init, modules may change everyting as almost nothing is already set here
 // Module may hook here to change Page_id Language or whatever. Even System Constants.
@@ -81,24 +80,24 @@ if (defined('ADMIN_DIRECTORY') and !defined('WB_ADMIN_DIRECTORY')) {
     define('WB_ADMIN_DIRECTORY', ADMIN_DIRECTORY);
 }
 // check if someone added crap in the config
-if (!preg_match('/xx[a-z0-9_][a-z0-9_\-\.]+/i', 'xx' . WB_ADMIN_DIRECTORY)) {
-    die('Invalid admin-directory: ' . WB_ADMIN_DIRECTORY);
+if (!preg_match('/xx[a-z0-9_][a-z0-9_\-\.]+/i', 'xx' . ADMIN_DIRECTORY)) {
+    die('Invalid admin-directory: ' . ADMIN_DIRECTORY);
 }
 
 // WB_ADMIN_URL (ADMIN_URL)
-if (!defined('ADMIN_URL'))     {define('ADMIN_URL', WB_URL . '/' . WB_ADMIN_DIRECTORY);}
-if (!defined('WB_ADMIN_URL'))  {define('WB_ADMIN_URL', WB_URL . '/' . WB_ADMIN_DIRECTORY);}
+if (!defined('ADMIN_URL')) {define('ADMIN_URL', WB_URL . '/' . WB_ADMIN_DIRECTORY);}
+if (!defined('WB_ADMIN_URL')) {define('WB_ADMIN_URL', WB_URL . '/' . WB_ADMIN_DIRECTORY);}
 
 // WB_PATH
-if (!defined('WB_PATH'))       {define('WB_PATH', dirname(dirname(__FILE__)));}
+if (!defined('WB_PATH')) {define('WB_PATH', dirname(dirname(__FILE__)));}
 
 // WB_ADMIN_PATH (ADMIN_PATH)
-if (!defined('ADMIN_PATH'))    {define('ADMIN_PATH', WB_PATH . '/' . ADMIN_DIRECTORY);}
-if (!defined('WB_ADMIN_PATH')) {define('WB_ADMIN_PATH', WB_PATH . '/' . ADMIN_DIRECTORY);}
+if (!defined('ADMIN_PATH')) {define('ADMIN_PATH', WB_PATH . '/' . ADMIN_DIRECTORY);}
+if (!defined('ADMIN_PATH')) {define('ADMIN_PATH', WB_PATH . '/' . ADMIN_DIRECTORY);}
 
-// WB_PROTOCOLL (This is a new Constant so no old variant)
+// WB_PROTOCOLL
 $protocoll="http";
-// $_SERVER['HTTPS'] alone is not reliable ... :-(
+// $_SERVER['HTTPS'] is not reliable ... :-(
 //https://github.com/dmikusa-pivotal/cf-php-apache-buildpack/issues/6
 if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){
     $protocoll="https"; 
@@ -111,7 +110,9 @@ if(isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] and $_SERVER['HTTPS']!="off"){
 }
 define ("WB_PROTOCOLL", $protocoll);
 
-
+// Selected and checked are needed in so many forms that i decided to lazy define them here
+if (!defined('WB_SELECT')) {define('WB_SELECT',' selected="selected" ');}
+if (!defined('WB_CHECK'))  {define('WB_CHECK',' checked="checked" ');}
 
 // AUTOLOADERS
 // register WB Autoloader 
@@ -135,18 +136,14 @@ Settings::Setup ();
 // RESULTING CONSTANTS
 // some resulting constants need to be set manually 
 
-// DO_NOT_TRACK (deprecated, not used and we remove this soon)
+// DO_NOT_TRACK (deprecated, not used ang we remove this soon)
 define('DO_NOT_TRACK', (isset($_SERVER['HTTP_DNT'])));
 
-// Filemodes
+// Filemodes/Dirmodes
 $string_file_mode = STRING_FILE_MODE;
 define('OCTAL_FILE_MODE', (int) octdec($string_file_mode));
-define('WB_OCTAL_FILE_MODE', (int) octdec($string_file_mode));
-
-//Dirmodes
 $string_dir_mode = STRING_DIR_MODE;
 define('OCTAL_DIR_MODE', (int) octdec($string_dir_mode));
-define('WB_OCTAL_DIR_MODE', (int) octdec($string_dir_mode));
 
 // WB_MEDIA_URL (there is no old couterpart)
 if (!defined ("WB_MEDIA_URL")) define ("WB_MEDIA_URL",  WB_URL.MEDIA_DIRECTORY);

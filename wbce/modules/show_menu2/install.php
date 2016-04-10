@@ -21,4 +21,4 @@
 if(defined('WB_PATH') == false) { die("Cannot access this file directly"); }
 
 
-?>
+

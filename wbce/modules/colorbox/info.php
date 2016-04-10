@@ -13,5 +13,6 @@ $module_license       = '<a href="http://www.gnu.org/licenses/gpl.html">GNU Gene
 $module_description   = 'ColorBox v1.6 - a full featured, light-weight, customizable lightbox based on-<a href="http://www.jacklmoore.com/colorbox">colorbox</a> For details about the License see the License file.';
 $module_home          = '';
 $module_requirements  = 'WB 2.8.2+, jQuery ';
+$module_icon          = 'fa fa-file-image-o';
 
 

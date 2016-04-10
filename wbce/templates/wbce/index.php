@@ -1,6 +1,6 @@
 <?php
 // no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 ?><!DOCTYPE HTML>
 <html lang="de-de" dir="ltr">
 <head>
@@ -190,7 +190,7 @@ if ($fullbottom) {?>
 <?php }
 ?>
 <div class="row">
-<div class="fg12 footer"><?php echo WEBSITE_FOOTER;?></div>
+<div class="fg12 footer"><?php  if(function_exists('language_menu')) { language_menu('TXT'); }  ?></div>
 </div>
 </div>
 

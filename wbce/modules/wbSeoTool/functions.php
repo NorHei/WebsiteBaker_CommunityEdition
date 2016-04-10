@@ -12,8 +12,8 @@
  * @license     http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-//no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+// prevent this file from being accessed directly
+if(!defined('WB_PATH')) exit("Cannot access this file directly ".__FILE__);
 
 if(!function_exists('pagesArray')){
 	

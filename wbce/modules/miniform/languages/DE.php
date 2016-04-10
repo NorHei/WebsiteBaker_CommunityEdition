@@ -13,8 +13,6 @@
  *
  */
 
-$module_description = 'This module allows you to create a quick and simple form without complicated settings.';
-
 
 $MF['MINIFORM'] = 'MiniForm';
 $MF['SETTINGS'] = 'Einstellungen';

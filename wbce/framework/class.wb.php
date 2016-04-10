@@ -11,7 +11,7 @@
  */
 
 //no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 
 class wb extends SecureForm
 {
@@ -169,19 +169,6 @@ class wb extends SecureForm
         }
         return stripslashes($input);
     }
-
-
-    /**
-    Strip values from magic quotes if magic quotes is on. 
-    */
-    function strip_magic($input) {
-    if (get_magic_quotes_gpc() and is_string($input)) {
-            return stripslashes($input);
-        }
-        return $input;
-    }
-
-
 
     // Escape backslashes for use with mySQL LIKE strings
     public function escape_backslashes($input)

@@ -190,4 +190,4 @@ function page_menu(
         $menu_header, $menu_footer, $default_class, $current_class, $aParent);
 }
 
-?>
+

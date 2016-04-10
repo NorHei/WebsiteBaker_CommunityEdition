@@ -11,7 +11,7 @@
  */
 
 //no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 
 // Get WB version
 require_once ADMIN_PATH . '/interface/version.php';
@@ -65,6 +65,8 @@ class admin extends wb
                 $this->print_header();
             }
         }
+        global $wb;
+        $wb = $this;
     }
 
     // Print the admin header
@@ -163,6 +165,7 @@ class admin extends wb
             array(ADMIN_URL . '/preferences/index.php', '', $MENU['PREFERENCES'], 'preferences', 0),
             array(ADMIN_URL . '/settings/index.php', '', $MENU['SETTINGS'], 'settings', 1),
             array(ADMIN_URL . '/admintools/index.php', '', $MENU['ADMINTOOLS'], 'admintools', 1),
+            //array(ADMIN_URL . '/settingtools/index.php', '', $MENU['SETTINGS']."_new", 'settings', 1),
             array(ADMIN_URL . '/access/index.php', '', $MENU['ACCESS'], 'access', 1),
         );
         $header_template->set_block('header_block', 'linkBlock', 'link');

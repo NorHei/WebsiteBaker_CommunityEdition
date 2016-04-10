@@ -18,8 +18,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-//no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(!defined('WB_PATH')) { exit("Cannot access this file directly"); }
 
 $database->query("DROP TABLE ".TABLE_PREFIX."mod_sitemap");
 

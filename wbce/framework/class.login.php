@@ -11,7 +11,7 @@
  */
 
 //no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 
 // Get WB version
 require_once ADMIN_PATH . '/interface/version.php';
@@ -222,88 +222,14 @@ class login extends admin
     public function remember($user_id)
     {
         return true;
-//        global $database;
-        //        $remember_key = '';
-        //        // Generate user id to append to the remember key
-        //        $length = 11-strlen($user_id);
-        //        if($length > 0) {
-        //            for($i = 1; $i <= $length; $i++) {
-        //                $remember_key .= '0';
-        //            }
-        //        }
-        //        // Generate remember key
-        //        $remember_key .= $user_id.'_';
-        //        $salt = "abchefghjkmnpqrstuvwxyz0123456789";
-        //        srand((double)microtime()*1000000);
-        //        $i = 0;
-        //        while ($i <= 10) {
-        //            $num = rand() % 33;
-        //            $tmp = substr($salt, $num, 1);
-        //            $remember_key = $remember_key . $tmp;
-        //            $i++;
-        //        }
-        //        $remember_key = $remember_key;
-        //        // Update the remember key in the db
-        //        // $database = new database();
-        //        $database->query("UPDATE ".$this->users_table." SET remember_key = '$remember_key' WHERE user_id = '$user_id' LIMIT 1");
-        //        if($database->is_error()) {
-        //            return false;
-        //        } else {
-        //            // Workout options for the cookie
-        //            $cookie_name = 'REMEMBER_KEY';
-        //            $cookie_value = $remember_key;
-        //            $cookie_expire = time()+60*60*24*30;
-        //            // Set the cookie
-        //            if(setcookie($cookie_name, $cookie_value, $cookie_expire, '/')) {
-        //                return true;
-        //            } else {
-        //                return false;
-        //            }
-        //        }
+
     }
 
     // Function to check if a user has been remembered
     public function is_remembered()
     {
         return false;
-//        global $database;
-        //        // add if get_safe_remember_key not empty
-        //        if(isset($_COOKIE['REMEMBER_KEY']) && ($_COOKIE['REMEMBER_KEY'] != '') && ($this->get_safe_remember_key() <> '' ) )
-        //        {
-        //            // Check if the remember key is correct
-        //            // $database = new database();
-        //            $sql = "SELECT `user_id` FROM `" . $this->users_table . "` WHERE `remember_key` = '";
-        //            $sql .= $this->get_safe_remember_key() . "' LIMIT 1";
-        //            $check_query = $database->query($sql);
-        //
-        //            if($check_query->numRows() > 0)
-        //            {
-        //                $check_fetch = $check_query->fetchRow();
-        //                $user_id = $check_fetch['user_id'];
-        //                // Check the remember key prefix
-        //                $remember_key_prefix = '';
-        //                $length = 11-strlen($user_id);
-        //                if($length > 0)
-        //                {
-        //                    for($i = 1; $i <= $length; $i++)
-        //                    {
-        //                        $remember_key_prefix .= '0';
-        //                    }
-        //                }
-        //                $remember_key_prefix .= $user_id.'_';
-        //                $length = strlen($remember_key_prefix);
-        //                if(substr($_COOKIE['REMEMBER_KEY'], 0, $length) == $remember_key_prefix)
-        //                {
-        //                    return true;
-        //                } else {
-        //                    return false;
-        //                }
-        //            } else {
-        //                return false;
-        //            }
-        //        } else {
-        //            return false;
-        //        }
+
     }
 
     // Display the login screen
@@ -385,6 +311,71 @@ class login extends admin
     {
         header('Location: ' . $this->warning_url);
         exit(0);
+    }
+    
+    
+    /**
+        Returns false on success and an error message if 
+    
+    */
+    public static function CheckPass ($password="", $userId=false){
+    
+        global $MESSAGE, $database;
+
+        if (!defined('WB_PASS_LENGTH_MIN')) define('WB_PASS_LENGTH_MIN', 6);
+        if (!defined('WB_PASS_LENGTH_MAX')) define('WB_PASS_LENGTH_MAX', 10); 
+
+        // empty
+        if (empty($password)) return $MESSAGE['USERS_PASSWORD_EMPTY'];
+        
+        // too short
+        $regex="/.{".WB_PASS_LENGTH_MIN.",}/su";
+        if (!preg_match($regex, $password)) return $MESSAGE['USERS_PASSWORD_TOO_SHORT'];
+        
+        // too long
+        $regex="/^.{1,".WB_PASS_LENGTH_MAX."}$/su";
+        if (!preg_match($regex, $password)) return $MESSAGE['USERS_PASSWORD_TOO_LONG'];
+        
+        // Check password against DB only if a user is set 
+        if (!$userId) return false;
+        
+        $sql  = 'SELECT `password` ';
+        $sql .= 'FROM `'.TABLE_PREFIX.'users` ';
+        $sql .= 'WHERE `user_id` = '.(int)$userId;
+        $passHash = $database->get_one($sql);
+        
+        // old md5 passwords
+        if (md5($password) ==  $passHash) return false;
+
+        // sha1 replacement
+        if (login::HashPass($password,"sha1") == $passHash) return false;
+
+        // PHP 5.5 buildin password functions
+        if (version_compare(PHP_VERSION, '5.5.0' ) >= 0){
+            if (password_verify ($password, $passHash)) return false;
+        }
+        return $MESSAGE['USERS_PASSWORD_INCORRECT'];
+    }
+    
+    public static function HashPass ($password, $forceOld=false){  
+        
+        if (version_compare(PHP_VERSION, '5.5.0' ) >= 0  and $forceOld===false) {
+            //use_bcrypt
+            if (defined ('WB_PASS_COST'))
+                $password = password_hash($password, PASSWORD_BCRYPT, array('cost'=> WB_PASS_COST));
+            else
+                $password = password_hash($password, PASSWORD_BCRYPT);           
+        } else if  ($forceOld=="md5") {
+            //now we go for Very Old
+            $password= md5($password);     
+        } else { 
+            //This is a extremely poor replacement for bcrypt 
+            $password = "hier ist dfdfd".$password."allesFtdg";
+            for ($i = 1; $i <= 1959; $i++) {
+                $password=sha1($password);
+            }        
+        }
+        return $password;
     }
 
 }

@@ -11,7 +11,7 @@
  */
 
 //no direct file access
-if(count(get_included_files())==1) die(header("Location: ../index.php",TRUE,301));
+if(count(get_included_files())==1) header("Location: ../index.php",TRUE,301);
 
 
 // compatibility mode for versions before 2.8.1
@@ -101,7 +101,7 @@ if (!function_exists('get_page_link')) {
     function get_page_link($id)
     {
         global $database;
-        $sql = 'SELECT `link` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . (int)$id;
+        $sql = 'SELECT `link` FROM `' . TABLE_PREFIX . 'pages` WHERE `page_id` = ' . $id;
         $link = $database->get_one($sql);
         return $link;
     }

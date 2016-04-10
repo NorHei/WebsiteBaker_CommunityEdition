@@ -62,16 +62,14 @@
  -----------------------------------------------------------------------------------------
 */
 
-$module_directory   = 'user_search';
-$module_name        = 'User search';
-$module_function    = 'tool';
-$module_version     = '0.41.1';
-$module_platform    = '2.8.3';
-$module_author      = 'Bernd Michna';
-$module_license     = 'GNU General Public License';
+$module_directory = 'user_search';
+$module_name = 'User search';
+$module_function = 'tool';
+$module_version = '0.41';
+$module_platform = '2.8.3';
+$module_author = 'Bernd Michna';
+$module_license = 'GNU General Public License';
 $module_description = 'This module provides a search function for the user management.';
-$module_icon        = 'fa fa-search';
-
-$module_guid        = 'EE87F4AD-F675-4E44-81EE-91B8D491977B';
+$module_guid = 'EE87F4AD-F675-4E44-81EE-91B8D491977B';
 
 

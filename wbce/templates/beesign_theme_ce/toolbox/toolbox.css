@@ -1,0 +1,23 @@
+body {background-color: #eee; margin:0;}
+
+.toolboxcontent {font-family: arial,helvetica,sans-serif; font-size:11px; margin: 0 2%;}
+.toolboxcontent h3 {margin:5px 0 0 0;  border-top: 1px solid #999;}
+.toolboxcontent p {margin:0 0 5px 0;}
+.toolboxcontent .toolboxform, .toolboxcontent .toolboxsubmit {width:96%; border: 1px solid #999; padding:1%; font-size:11px;}
+.formblock {margin-bottom:10px; padding-bottom:10px; border-bottom: 1px dotted #666;}
+
+a.toolboxmenue {font-family: arial,helvetica,sans-serif; display:block; padding:3px; font-size:12px; text-align:center; text-decoration:none; border-bottom: 1px solid #666;} 
+
+#istherest {opacity:0.2;}
+/*Piclist*/
+#toolbox_piclist {text-align:center;}
+#toolbox_piclist img {max-width: 80%; max-height: 100px; margin:15px auto 0 auto; cursor:move;}
+#toolbox_piclist .fileattr {font-family: arial,helvetica,sans-serif; margin: 0 0 3px 0; padding: 0 0 3px 0; font-size:11px;}
+#toolbox_piclist .filename {font-family: arial,helvetica,sans-serif; margin: 0 0 3px 0; padding: 0 0 3px 0; font-size:11px; border-bottom: 1px dotted #666;}
+
+/*SEO*/
+#seoanzeige {width:50px; height:10px; float:right; background-color:#999;}
+#seoanzeige div {width:10px; height:10px;  background-color:#009900;}
+.formblock #description {height:120px;}
+.formblock #keywords {height:60px;}
+
